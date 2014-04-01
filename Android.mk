@@ -75,3 +75,15 @@ LOCAL_C_INCLUDES += $(common_C_INCLUDES) external/icu4c/common
 LOCAL_SHARED_LIBRARIES += $(common_SHARED_LIBRARIES)
 LOCAL_MODULE:= libxml2
 include $(BUILD_HOST_STATIC_LIBRARY)
+
+
+# For the host on build systems with schema validation
+# ========================================================
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := $(common_SRC_FILES)
+LOCAL_C_INCLUDES := $(common_C_INCLUDES) external/icu4c/common
+LOCAL_SHARED_LIBRARIES := $(common_SHARED_LIBRARIES)
+LOCAL_CFLAGS := -DLIBXML_UNICODE_ENABLED -DLIBXML_REGEXP_ENABLED -DLIBXML_PATTERN_ENABLED -DLIBXML_SCHEMAS_ENABLED
+LOCAL_MODULE:= libxml2-schemas
+include $(BUILD_HOST_STATIC_LIBRARY)
